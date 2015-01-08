@@ -1,3 +1,3 @@
-angular.module('testMod', ['ngMaterial']).controller('testCtrl', function($scope) {
+angular.module('testMod', ['ngMaterial','mdDateTime']).controller('testCtrl', function($scope) {
 	return $scope.date = new Date();
 });
