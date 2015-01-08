@@ -118,7 +118,7 @@
               return new Date(this._year, this._month, d).getMonth() === this._month;
             },
             "class": function(d) {
-              if (new Date(this._year, this._month, d).getTime() === new Date(scope.date.getTime()).setHours(0, 0, 0, 0)) {
+              if ((scope.date != null) && new Date(this._year, this._month, d).getTime() === new Date(scope.date.getTime()).setHours(0, 0, 0, 0)) {
                 return "selected";
               } else if (new Date(this._year, this._month, d).getTime() === new Date().setHours(0, 0, 0, 0)) {
                 return "today";
