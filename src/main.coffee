@@ -8,7 +8,7 @@ angular.module('mdDateTime', [])
 		_save: '=onSave'
 		_modelValue: '=ngModel'
 	require: 'ngModel'
-	templateUrl: 'time-date.tpl.html'
+	templateUrl: 'md-date-time.tpl.html'
 	link: (scope, element, attrs, ngModel) ->
 		attrs.$observe 'defaultMode', (val) -> scope._mode = val ? 'date'
 		attrs.$observe 'displayMode', (val) -> scope._displayMode = val
