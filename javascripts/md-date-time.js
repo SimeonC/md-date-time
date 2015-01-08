@@ -18,7 +18,7 @@
         _modelValue: '=ngModel'
       },
       require: 'ngModel',
-      templateUrl: 'time-date.tpl.html',
+      templateUrl: 'md-date-time.tpl.html',
       link: function(scope, element, attrs, ngModel) {
         attrs.$observe('defaultMode', function(val) {
           return scope._mode = val != null ? val : 'date';
