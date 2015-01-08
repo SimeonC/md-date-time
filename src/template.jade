@@ -1,0 +1,50 @@
+.time-date(ng-class="modeClass()")
+	.display(ng-click="modeSwitch()" aria-label="Switch to {{modeSwitchText()}}")
+		.title {{display.title()}}
+		.content
+			.super-title {{display.super()}}
+			.main-title(ng-bind-html="display.main()")
+			.sub-title {{display.sub()}}
+	.control
+		.full-title {{display.fullTitle()}}
+		.slider 
+			.date-control
+				.title
+					md-button(ng-click="calendar._incMonth(-1)" aria-label="Previous Month" style="float: left;")
+						i.fa.fa-caret-left
+					span.month-part {{date | date:'MMMM'}}
+						select(ng-model="calendar._month" ng-change="calendar.monthChange()" ng-options="calendar._months.indexOf(month) as month for month in calendar._months")
+					input.year-part(ng-model="calendar._year" ng-change="calendar.monthChange()" type="number")
+					md-button(ng-click="calendar._incMonth(1)" aria-label="Next Month" style="float: right;")
+						i.fa.fa-caret-right
+				.headers
+					each day in ['S','M','T','W','T','F','S']
+						.day-cell= day
+				.days
+					each day in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+						if day === 1
+							md-button.day-cell(ng-style="{'margin-left': calendar.offsetMargin()}" ng-class= "calendar.class("+day+")" ng-show="calendar.isVisible("+day+")" ng-click="calendar.select("+day+")")= day
+						else
+							md-button.day-cell(ng-class= "calendar.class("+day+")" ng-show="calendar.isVisible("+day+")" ng-click="calendar.select("+day+")")= day
+			md-button.switch-control(ng-click="modeSwitch()" aria-label="Switch to {{modeSwitchText()}}")
+				i.fa.fa-clock-o
+				i.fa.fa-calendar
+				span.visuallyhidden {{modeSwitchText()}}
+			.time-control
+				.time-inputs
+					input(type="number" min="{{_hours24 ? 0 : 1}}" max="{{_hours24 ? 23 : 12}}" ng-model="clock._hours")
+					md-button.hours.up(ng-click="clock._incHours(1)" aria-label="Increment Hours")
+						i.fa.fa-caret-up
+					md-button.hours.down(ng-click="clock._incHours(-1)" aria-label="Decrement Hours")
+						i.fa.fa-caret-down
+					input(type="number" min="0" max="59" ng-model="clock._minutes")
+					md-button.minutes.up(ng-click="clock._incMinutes(1)" aria-label="Increment Minutes")
+						i.fa.fa-caret-up
+					md-button.minutes.down(ng-click="clock._incMinutes(-1)" aria-label="Decrement Minutes")
+						i.fa.fa-caret-down
+				.buttons(ng-if="!_hours24")
+					md-button(ng-click="clock.setAM()" aria-label="Switch AM/PM") {{date | date:'a'}}
+	.buttons
+		md-button(ng-click="setNow()" aria-label="Set To Current {{ _dispalyMode == 'date' ? 'Date' : 'Date/Time'}}") Now 
+		md-button(ng-click="cancel()" aria-label="Cancel") Cancel
+		md-button(ng-click="save()" aria-label="Save") Save
