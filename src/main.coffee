@@ -59,7 +59,7 @@ angular.module('mdDateTime', [])
 			offsetMargin: -> "#{new Date(@_year, @_month).getDay() * 2.7}rem"
 			isVisible: (d) -> new Date(@_year, @_month, d).getMonth() is @_month
 			class: (d) ->
-				if new Date(@_year, @_month, d).getTime() is new Date(scope.date.getTime()).setHours(0,0,0,0) then "selected"
+				if scope.date? and new Date(@_year, @_month, d).getTime() is new Date(scope.date.getTime()).setHours(0,0,0,0) then "selected"
 				else if new Date(@_year, @_month, d).getTime() is new Date().setHours(0,0,0,0) then "today"
 				else ""
 			select: (d) -> scope.date.setFullYear @_year, @_month, d

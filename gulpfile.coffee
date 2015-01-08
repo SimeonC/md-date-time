@@ -58,7 +58,7 @@ gulp.task 'compile:javascript', ['compile:coffee'], ->
 	
 gulp.task 'compile:stylus', ['clean:dist'], ->
 	pkg = JSON.parse fs.readFileSync './package.json', 'utf8'
-	gulp.src ['./src/styles.stylus']
+	gulp.src ['./src/styles.styl']
 		.pipe stylus()
 		.pipe autoprefixer()
 		.pipe concat()
