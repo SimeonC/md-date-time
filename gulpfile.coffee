@@ -99,8 +99,8 @@ releaseVersion = (importance) ->
 		.pipe bump type: importance
 		# save it back to filesystem
 		.pipe gulp.dest './'
-tagVersion = ->
-	gulp.src ['./package.json']
+gulp.task 'tagversion', ->
+	gulp.src ['./package.json','./bower.json','./dist/*']
 		# commit the changed version number
 		.pipe git.commit 'chore(release): Bump Version Number'
 		# **tag it in the repository**
@@ -114,23 +114,23 @@ gulp.task 'prerel', ->
 	runSequence(
 		'release:prerel'
 		, 'compile'
-		, tagVersion()
+		, 'tagversion'
 	)
 gulp.task 'patch', -> 
 	runSequence(
 		'release:patch'
 		, 'compile'
-		, tagVersion()
+		, 'tagversion'
 	)
 gulp.task 'minor', ->
 	runSequence(
 		'release:minor'
 		, 'compile'
-		, tagVersion()
+		, 'tagversion'
 	)
 gulp.task 'major', ->
 	runSequence(
 		'release:major'
 		, 'compile'
-		, tagVersion()
+		, 'tagversion'
 	)
