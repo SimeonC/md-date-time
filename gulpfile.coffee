@@ -104,6 +104,7 @@ gulp.task 'tagversion', ->
 		# commit the changed version number
 		.pipe git.commit 'chore(release): Bump Version Number'
 		# **tag it in the repository**
+		.pipe gulp.src ['./package.json']
 		.pipe tag_version()
 
 gulp.task 'release:prerel', -> releaseVersion 'prerelease'
