@@ -9,6 +9,7 @@ del = require 'del'
 concat = require 'gulp-concat-util'
 order = require 'gulp-order'
 rename = require 'gulp-rename'
+runSequence = require 'run-sequence'
 
 stylus = require 'gulp-stylus'
 autoprefixer = require 'gulp-autoprefixer'
@@ -76,7 +77,6 @@ gulp.task 'compile:stylus', ['clean:dist'], ->
 
 gulp.task 'compile:main', ['compile:javascript','compile:stylus']
 gulp.task 'compile', ['compile:main'], (cb) -> del ['dist/*.temp'], cb
-	
 
 ###
 	Bumping version number and tagging the repository with it.
@@ -105,10 +105,32 @@ tagVersion = ->
 		.pipe git.commit 'chore(release): Bump Version Number'
 		# **tag it in the repository**
 		.pipe tag_version()
+
 gulp.task 'release:prerel', -> releaseVersion 'prerelease'
 gulp.task 'release:patch', -> releaseVersion 'patch'
 gulp.task 'release:minor', -> releaseVersion 'minor'
 gulp.task 'release:major', -> releaseVersion 'major'
-gulp.task 'tag-version:prerel', ['compile']
-
-gulp.task 'prerel', ['release:prerel']
+gulp.task 'prerel', ->
+	runSequence(
+		'release:prerel'
+		, 'compile'
+		, tagVersion()
+	)
+gulp.task 'patch', -> 
+	runSequence(
+		'release:patch'
+		, 'compile'
+		, tagVersion()
+	)
+gulp.task 'minor', ->
+	runSequence(
+		'release:minor'
+		, 'compile'
+		, tagVersion()
+	)
+gulp.task 'major', ->
+	runSequence(
+		'release:major'
+		, 'compile'
+		, tagVersion()
+	)
