@@ -103,8 +103,9 @@ gulp.task 'tagversion', ->
 	gulp.src ['./package.json','./bower.json','./dist/*']
 		# commit the changed version number
 		.pipe git.commit 'chore(release): Bump Version Number'
+		# Filter down to only one file
+		.pipe filter 'package.json'
 		# **tag it in the repository**
-		.pipe gulp.src ['./package.json']
 		.pipe tag_version()
 
 gulp.task 'release:prerel', -> releaseVersion 'prerelease'
