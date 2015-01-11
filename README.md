@@ -57,14 +57,14 @@ Download the code from [https://github.com/simeonc/md-date-time/releases/latest]
 
 ### Options
 
-**on-cancel:** Function passed in is called if the cancel button is pressed
-**on-save:** Function passed in is called when the date is saved via the OK button
-**default-mode** A string of value 'date'/'time', which side of the slider that should be shown initially, overridden by display-mode
-**display-mode** Options are "full"; display time and date selectors and no display, "time"; show only the time input, "date"; show only the date input
-**orientation** If this string value is 'true' then the picker will be in vertical mode. Otherwise it will change to vertical mode if the screen width is less than 51rem as that is the size of the editor
-**display-twentyfour** If this value is truthy then display 24 hours in time, else use 12 hour time.
-**mindate** *Under Construction!*
-**maxdate** *Under Construction!*
+* **on-cancel:** Function passed in is called if the cancel button is pressed
+* **on-save:** Function passed in is called when the date is saved via the OK button
+* **default-mode** A string of value 'date'/'time', which side of the slider that should be shown initially, overridden by display-mode
+* **display-mode** Options are "full"; display time and date selectors and no display, "time"; show only the time input, "date"; show only the date input
+* **orientation** If this string value is 'true' then the picker will be in vertical mode. Otherwise it will change to vertical mode if the screen width is less than 51rem as that is the size of the editor
+* **display-twentyfour** If this value is truthy then display 24 hours in time, else use 12 hour time.
+* **mindate** *Under Construction!*
+* **maxdate** *Under Construction!*
 
 
 ### Issues?
