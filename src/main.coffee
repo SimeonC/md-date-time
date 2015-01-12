@@ -87,7 +87,10 @@ angular.module('mdDateTime', [])
 				@_hours = if scope._hours24
 				then Math.max 0, Math.min 23, @_hours + inc
 				else Math.max 1, Math.min 12, @_hours + inc
-			_incMinutes: (inc) -> @_minutes = Math.max 0, Math.min 59, @_minutes + inc
+				if isNaN @_hours then @_hours = 0
+			_incMinutes: (inc) ->
+				@_minutes = Math.max 0, Math.min 59, @_minutes + inc
+				if isNaN @_minutes then @_minutes = 0
 			setAM: (b=not @isAM()) ->
 				if b and not @isAM()
 					scope.date.setHours(scope.date.getHours() - 12)
