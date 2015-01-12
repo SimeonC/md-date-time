@@ -2,7 +2,7 @@
 	@license md-date-time
 	@author SimeonC
 	@license 2015 MIT
-	@version 0.0.5
+	@version 0.0.6
 	
 	See README.md for requirements and use.
 */angular.module('mdDateTime', []).directive('timeDatePicker', [
@@ -159,10 +159,16 @@
             _minutes: 0,
             _hours: 0,
             _incHours: function(inc) {
-              return this._hours = scope._hours24 ? Math.max(0, Math.min(23, this._hours + inc)) : Math.max(1, Math.min(12, this._hours + inc));
+              this._hours = scope._hours24 ? Math.max(0, Math.min(23, this._hours + inc)) : Math.max(1, Math.min(12, this._hours + inc));
+              if (isNaN(this._hours)) {
+                return this._hours = 0;
+              }
             },
             _incMinutes: function(inc) {
-              return this._minutes = Math.max(0, Math.min(59, this._minutes + inc));
+              this._minutes = Math.max(0, Math.min(59, this._minutes + inc));
+              if (isNaN(this._minutes)) {
+                return this._minutes = 0;
+              }
             },
             setAM: function(b) {
               if (b == null) {
