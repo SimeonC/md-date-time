@@ -101,7 +101,7 @@ releaseVersion = (importance) ->
 		# save it back to filesystem
 		.pipe gulp.dest './'
 gulp.task 'tagversion', ->
-	gulp.src ['./package.json','./bower.json','./dist/*']
+	gulp.src ['./package.json','./bower.json','./changelog.md','./dist/*']
 		# commit the changed version number
 		.pipe git.commit 'chore(release): Bump Version Number'
 		# Filter down to only one file
