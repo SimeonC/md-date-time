@@ -136,3 +136,5 @@ gulp.task 'major', ->
 		, 'compile'
 		, 'tagversion'
 	)
+
+gulp.task 'default', ['compile']

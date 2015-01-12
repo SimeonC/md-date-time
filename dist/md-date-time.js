@@ -69,7 +69,10 @@
             scope.calendar._year = scope.date.getFullYear();
             scope.calendar._month = scope.date.getMonth();
             scope.clock._minutes = scope.date.getMinutes();
-            return scope.clock._hours = scope._hours24 ? scope.date.getHours() : scope.date.getHours() % 12;
+            scope.clock._hours = scope._hours24 ? scope.date.getHours() : scope.date.getHours() % 12;
+            if (!scope._hours24 && scope.clock._hours === 0) {
+              return scope.clock._hours = 12;
+            }
           };
           scope.display = {
             fullTitle: function() {
