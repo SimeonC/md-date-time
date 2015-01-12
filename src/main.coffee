@@ -94,10 +94,10 @@ angular.module('mdDateTime', [])
 				else if not b and @isAM()
 					scope.date.setHours(scope.date.getHours() + 12)
 			isAM: -> scope.date.getHours() < 12
-		scope.$watch 'clock._minutes', (val) ->
-			if val? and val isnt scope.date.getMinutes() then scope.date.setMinutes val
+		scope.$watch 'clock._minutes', (val, oldVal) ->
+			if val? and val isnt scope.date.getMinutes() and not isNaN(val) and 0 <= val <= 59 then scope.date.setMinutes val
 		scope.$watch 'clock._hours', (val) ->
-			if val?
+			if val? and not isNaN(val)
 				if not scope._hours24
 					if val is 24 then val = 12
 					else if val is 12 then val = 0

@@ -178,13 +178,13 @@
               return scope.date.getHours() < 12;
             }
           };
-          scope.$watch('clock._minutes', function(val) {
-            if ((val != null) && val !== scope.date.getMinutes()) {
+          scope.$watch('clock._minutes', function(val, oldVal) {
+            if ((val != null) && val !== scope.date.getMinutes() && !isNaN(val) && (0 <= val && val <= 59)) {
               return scope.date.setMinutes(val);
             }
           });
           scope.$watch('clock._hours', function(val) {
-            if (val != null) {
+            if ((val != null) && !isNaN(val)) {
               if (!scope._hours24) {
                 if (val === 24) {
                   val = 12;
