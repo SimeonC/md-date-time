@@ -1,0 +1,26 @@
+{
+  "name": "md-date-time",
+  "version": "0.0.5",
+  "main": [
+    "./src/md-date-time.js",
+    "./src/md-date-time.css"
+  ],
+  "description": "An implementation of the Material Design Date-Time picker",
+  "keywords": [
+    "angular"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test*",
+    "demo*",
+    "Gruntfile.js",
+    "package.json"
+  ],
+  "dependencies": {
+    "angular": "^1.2.x"
+  },
+  "license": "MIT",
+  "homepage": "http://simeonc.github.io/md-date-time"
+}
