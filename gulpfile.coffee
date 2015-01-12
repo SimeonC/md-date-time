@@ -1,5 +1,6 @@
 # dependencies
 fs = require 'fs'
+path = require 'path'
 gulp = require 'gulp'
 git = require 'gulp-git'
 bump = require 'gulp-bump'
@@ -10,6 +11,7 @@ concat = require 'gulp-concat-util'
 order = require 'gulp-order'
 rename = require 'gulp-rename'
 runSequence = require 'run-sequence'
+changelog = require 'conventional-changelog'
 
 stylus = require 'gulp-stylus'
 autoprefixer = require 'gulp-autoprefixer'
@@ -91,7 +93,6 @@ gulp.task 'compile', ['compile:main'], (cb) -> del ['dist/*.temp'], cb
 	To bump the version numbers accordingly after you did a patch,
 	introduced a feature or made a backwards-incompatible release.
 ###
-
 releaseVersion = (importance) ->
 	# get all the files to bump version in
 	gulp.src ['./package.json', './bower.json']
@@ -108,6 +109,14 @@ gulp.task 'tagversion', ->
 		# **tag it in the repository**
 		.pipe tag_version()
 
+gulp.task 'changelog', (cb) ->
+	pkg = JSON.parse fs.readFileSync './package.json', 'utf8'
+	changelog
+		version: pkg.version
+		repository: pkg.repository.url
+	, (err, content) ->
+		fs.writeFile './changelog.md', content, cb
+
 gulp.task 'release:prerel', -> releaseVersion 'prerelease'
 gulp.task 'release:patch', -> releaseVersion 'patch'
 gulp.task 'release:minor', -> releaseVersion 'minor'
@@ -115,24 +124,28 @@ gulp.task 'release:major', -> releaseVersion 'major'
 gulp.task 'prerel', ->
 	runSequence(
 		'release:prerel'
+		, 'changelog'
 		, 'compile'
 		, 'tagversion'
 	)
 gulp.task 'patch', -> 
 	runSequence(
 		'release:patch'
+		, 'changelog'
 		, 'compile'
 		, 'tagversion'
 	)
 gulp.task 'minor', ->
 	runSequence(
 		'release:minor'
+		, 'changelog'
 		, 'compile'
 		, 'tagversion'
 	)
 gulp.task 'major', ->
 	runSequence(
 		'release:major'
+		, 'changelog'
 		, 'compile'
 		, 'tagversion'
 	)
