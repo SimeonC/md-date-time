@@ -2,7 +2,7 @@
 	@license md-date-time
 	@author SimeonC
 	@license 2015 MIT
-	@version 0.0.6
+	@version 0.0.7
 	
 	See README.md for requirements and use.
 *//* Start Variable Declaration */
@@ -45,6 +45,8 @@
 }
 .time-date > .display > .content > .main-title {
   font-size: 6.1rem;
+  line-height: 6.1rem;
+  height: 6.1rem;
 }
 .time-date > .display > .content > .main-title > small {
   font-size: 1.1rem;
@@ -225,7 +227,7 @@
   color: transparent !important;
 }
 .time-date.time-mode > .display > .content {
-  padding-top: 4.1rem;
+  padding-top: 4.6rem;
 }
 .time-date.time-mode > .control > .slider {
   left: -100%;
@@ -313,12 +315,12 @@
   width: 100%;
 }
 .time-date.vertical.time-mode > .display > .content {
-  padding-top: 4.1rem;
+  padding-top: 4.6rem;
 }
 .time-date.vertical.time-only > .display > .content {
   top: 0px;
   padding-top: 0.8rem;
-  height: 12rem;
+  height: 10rem;
 }
 .time-date.vertical.full-mode > .display {
   display: none;
@@ -360,12 +362,12 @@
     width: 100%;
   }
   .time-date.time-mode > .display > .content {
-    padding-top: 4.1rem;
+    padding-top: 4.6rem;
   }
   .time-date.time-only > .display > .content {
     top: 0px;
     padding-top: 0.8rem;
-    height: 12rem;
+    height: 10rem;
   }
   .time-date.full-mode > .display {
     display: none;
