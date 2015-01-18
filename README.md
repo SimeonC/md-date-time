@@ -52,7 +52,7 @@ Download the code from [https://github.com/simeonc/md-date-time/releases/latest]
 2. Add a dependency to `mdDateTime` in your app module, for example: ```angular.module('myModule', ['mdDateTime'])```.
 3. Some implementation settings are required to get this useful, but for basic inline use:
 ```html
-<text-date-picker ng-model="dateValue"></div>
+<time-date-picker ng-model="dateValue"></div>
 ```
 
 ### Options
