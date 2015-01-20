@@ -1,11 +1,9 @@
 angular.module('mdDateTime', [])
-.directive 'timeDatePicker', ['$filter', '$sce', '$rootScope', ($filter, $sce, $rootScope) ->
+.directive 'timeDatePicker', ['$filter', '$sce', '$rootScope', '$parse', ($filter, $sce, $rootScope, $parse) ->
 	_dateFilter = $filter 'date'
 	restrict: 'AE'
 	replace: true
 	scope:
-		_cancel: '=onCancel'
-		_save: '=onSave'
 		_modelValue: '=ngModel'
 	require: 'ngModel'
 	templateUrl: 'md-date-time.tpl.html'
@@ -19,12 +17,16 @@ angular.module('mdDateTime', [])
 		attrs.$observe 'maxdate', (val) ->
 			if val? and angular.isDate val then scope.restrictions.maxdate = val
 		ngModel.$render = -> scope.setDate ngModel.$modelValue
+		
+		saveFn = $parse attrs.onSave
+		cancelFn = $parse attrs.onCancel
+		
 		scope.save = ->
 			scope._modelValue = scope.date
 			ngModel.$setDirty()
-			scope._save? scope.date
+			saveFn scope.$parent, $date: scope.date
 		scope.cancel = ->
-			scope._cancel?()
+			cancelFn scope.$parent, {}
 			ngModel.$render()
 	controller: ['$scope', (scope) ->
 		scope.restrictions =
