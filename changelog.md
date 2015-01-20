@@ -1,3 +1,11 @@
+### 0.0.11 (2015-01-21)
+
+
+#### Bug Fixes
+
+* **events:** Fixed up the onCancel and onSave functions to be as described ([8401cb6b](git://github.com/simeonc/md-date-time.git/commit/8401cb6b8f9b0a056f3c2fbb9aba4cdb8a3ef222))
+
+
 ### 0.0.10 (2015-01-12)
 
 
