@@ -50,7 +50,7 @@
           scope._modelValue = scope.date;
           ngModel.$setDirty();
           return saveFn(scope.$parent, {
-            $date: scope.date
+            $value: scope.date
           });
         };
         return scope.cancel = function() {

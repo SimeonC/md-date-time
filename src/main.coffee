@@ -24,7 +24,7 @@ angular.module('mdDateTime', [])
 		scope.save = ->
 			scope._modelValue = scope.date
 			ngModel.$setDirty()
-			saveFn scope.$parent, $date: scope.date
+			saveFn scope.$parent, $value: scope.date
 		scope.cancel = ->
 			cancelFn scope.$parent, {}
 			ngModel.$render()
