@@ -2,8 +2,8 @@
   "name": "md-date-time",
   "version": "0.0.11",
   "main": [
-    "./src/md-date-time.js",
-    "./src/md-date-time.css"
+    "./dist/md-date-time.js",
+    "./dist/md-date-time.css"
   ],
   "description": "An implementation of the Material Design Date-Time picker",
   "keywords": [
