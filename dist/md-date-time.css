@@ -80,6 +80,7 @@
 .time-date > .control > .slider > .date-control,
 .time-date > .control > .slider > .time-control {
   width: 45%;
+  overflow-y: hidden;
 }
 .time-date > .control > .slider > .switch-control {
   width: 10%;
@@ -107,6 +108,7 @@
 .time-date > .control > .slider > .date-control > .title > span.month-part {
   cursor: pointer;
   position: relative;
+  margin-right: 0.5rem;
 }
 .time-date > .control > .slider > .date-control > .title > span.month-part:hover {
   text-decoration: underline;
@@ -118,6 +120,7 @@
   left: 0px;
   right: 0px;
   opacity: 0;
+  width: 100%;
 }
 .time-date > .control > .slider > .date-control > .title > input {
   border: none;
