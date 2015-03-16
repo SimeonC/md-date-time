@@ -88,6 +88,7 @@ clock-radius = 75
 				height: content-height
 			& > .date-control, & > .time-control
 				width: 45%
+				overflow-y: hidden
 			& > .switch-control
 				width: 10%
 				cursor: pointer
@@ -105,6 +106,7 @@ clock-radius = 75
 					& > span.month-part
 						cursor: pointer
 						position: relative
+						margin-right: 0.5rem
 						&:hover
 							text-decoration: underline
 						& > select
@@ -114,6 +116,7 @@ clock-radius = 75
 							left: 0px
 							right: 0px
 							opacity: 0
+							width: 100%
 					& > input
 						border: none
 						width: 4.3rem
