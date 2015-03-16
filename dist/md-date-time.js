@@ -2,24 +2,23 @@
 	@license md-date-time
 	@author SimeonC
 	@license 2015 MIT
-	@version 0.0.7
+	@version 0.0.12
 	
 	See README.md for requirements and use.
 */angular.module('mdDateTime', []).directive('timeDatePicker', [
-  '$filter', '$sce', '$rootScope', function($filter, $sce, $rootScope) {
+  '$filter', '$sce', '$rootScope', '$parse', function($filter, $sce, $rootScope, $parse) {
     var _dateFilter;
     _dateFilter = $filter('date');
     return {
       restrict: 'AE',
       replace: true,
       scope: {
-        _cancel: '=onCancel',
-        _save: '=onSave',
         _modelValue: '=ngModel'
       },
       require: 'ngModel',
       templateUrl: 'md-date-time.tpl.html',
       link: function(scope, element, attrs, ngModel) {
+        var cancelFn, saveFn;
         attrs.$observe('defaultMode', function(val) {
           return scope._mode = val != null ? val : 'date';
         });
@@ -45,15 +44,17 @@
         ngModel.$render = function() {
           return scope.setDate(ngModel.$modelValue);
         };
+        saveFn = $parse(attrs.onSave);
+        cancelFn = $parse(attrs.onCancel);
         scope.save = function() {
           scope._modelValue = scope.date;
           ngModel.$setDirty();
-          return typeof scope._save === "function" ? scope._save(scope.date) : void 0;
+          return saveFn(scope.$parent, {
+            $value: scope.date
+          });
         };
         return scope.cancel = function() {
-          if (typeof scope._cancel === "function") {
-            scope._cancel();
-          }
+          cancelFn(scope.$parent, {});
           return ngModel.$render();
         };
       },
