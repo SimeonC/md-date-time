@@ -2,7 +2,7 @@
 	@license md-date-time
 	@author SimeonC
 	@license 2015 MIT
-	@version 0.0.12
+	@version 0.0.14
 	
 	See README.md for requirements and use.
 */angular.module('mdDateTime', []).directive('timeDatePicker', [
@@ -20,9 +20,15 @@
       link: function(scope, element, attrs, ngModel) {
         var cancelFn, saveFn;
         attrs.$observe('defaultMode', function(val) {
-          return scope._mode = val != null ? val : 'date';
+          if (val !== 'time' && val !== 'date') {
+            val = 'date';
+          }
+          return scope._mode = val;
         });
         attrs.$observe('displayMode', function(val) {
+          if (val !== 'full' && val !== 'time' && val !== 'date') {
+            val = void 0;
+          }
           return scope._displayMode = val;
         });
         attrs.$observe('orientation', function(val) {
