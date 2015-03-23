@@ -8,8 +8,12 @@ angular.module('mdDateTime', [])
 	require: 'ngModel'
 	templateUrl: 'md-date-time.tpl.html'
 	link: (scope, element, attrs, ngModel) ->
-		attrs.$observe 'defaultMode', (val) -> scope._mode = val ? 'date'
-		attrs.$observe 'displayMode', (val) -> scope._displayMode = val
+		attrs.$observe 'defaultMode', (val) ->
+			if val isnt 'time' and val isnt 'date' then val = 'date'
+			scope._mode = val
+		attrs.$observe 'displayMode', (val) ->
+			if val isnt 'full' and val isnt 'time' and val isnt 'date' then val = undefined
+			scope._displayMode = val
 		attrs.$observe 'orientation', (val) -> scope._verticalMode = val is 'true'
 		attrs.$observe 'displayTwentyfour', (val) -> scope._hours24 = val? and val
 		attrs.$observe 'mindate', (val) ->
