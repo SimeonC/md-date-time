@@ -21,10 +21,10 @@ angular.module('mdDateTime', [])
 		attrs.$observe 'maxdate', (val) ->
 			if val? and angular.isDate val then scope.restrictions.maxdate = val
 		ngModel.$render = -> scope.setDate ngModel.$modelValue
-		
+
 		saveFn = $parse attrs.onSave
 		cancelFn = $parse attrs.onCancel
-		
+
 		scope.save = ->
 			scope._modelValue = scope.date
 			ngModel.$setDirty()
@@ -37,7 +37,7 @@ angular.module('mdDateTime', [])
 			mindate: undefined
 			maxdate: undefined
 		scope.setDate = (newVal) ->
-			scope.date = if newVal? then new Date newVal else new Date()
+			scope.date = if newVal then new Date newVal else new Date()
 			scope.calendar._year = scope.date.getFullYear()
 			scope.calendar._month = scope.date.getMonth()
 			scope.clock._minutes = scope.date.getMinutes()
