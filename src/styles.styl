@@ -34,6 +34,9 @@ clock-radius = 75
 .visuallyhidden
 	visibility: hidden
 
+.hide
+	visibility: hidden
+
 .time-date
 	overflow: hidden
 	border: none
@@ -151,6 +154,9 @@ clock-radius = 75
 						&:hover, &:active
 							color: hover-text-colour
 							background-color: hover-background-colour
+						&:disabled
+							color: #aaa
+							background-color: none;
 			& > .time-control
 				position: relative
 				& > .time-inputs

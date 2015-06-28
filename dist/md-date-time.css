@@ -11,6 +11,9 @@
 .visuallyhidden {
   visibility: hidden;
 }
+.hide {
+  visibility: hidden;
+}
 .time-date {
   overflow: hidden;
   border: none;
@@ -165,6 +168,10 @@
 .time-date > .control > .slider > .date-control > .days .day-cell:active {
   color: #e6e6e6;
   background-color: #00baa9;
+}
+.time-date > .control > .slider > .date-control > .days .day-cell:disabled {
+  color: #aaa;
+  background-color: none;
 }
 .time-date > .control > .slider > .time-control {
   position: relative;
