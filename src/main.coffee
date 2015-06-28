@@ -17,9 +17,9 @@ angular.module('mdDateTime', [])
 		attrs.$observe 'orientation', (val) -> scope._verticalMode = val is 'true'
 		attrs.$observe 'displayTwentyfour', (val) -> scope._hours24 = val? and val
 		attrs.$observe 'mindate', (val) ->
-			if val? and angular.isDate val then scope.restrictions.mindate = val
+			if val? and Date.parse val then scope.restrictions.mindate = new Date val
 		attrs.$observe 'maxdate', (val) ->
-			if val? and angular.isDate val then scope.restrictions.maxdate = val
+			if val? and Date.parse val then scope.restrictions.maxdate = new Date val
 		ngModel.$render = -> scope.setDate ngModel.$modelValue
 		
 		saveFn = $parse attrs.onSave
@@ -59,12 +59,22 @@ angular.module('mdDateTime', [])
 			sub: ->
 				if scope._mode is 'date' then _dateFilter scope.date, 'yyyy'
 				else _dateFilter scope.date, 'HH:mm'
+
 		scope.calendar =
 			_month: 0
 			_year: 0
-			_months: (_dateFilter new Date(0, i), 'MMMM' for i in [0..11])
+			_months: []
+			_allMonths: (_dateFilter new Date(0, i), 'MMMM' for i in [0..11])
 			offsetMargin: -> "#{new Date(@_year, @_month).getDay() * 2.7}rem"
 			isVisible: (d) -> new Date(@_year, @_month, d).getMonth() is @_month
+			isDisabled: (d) ->
+				currentDate = new Date(@_year, @_month, d)
+				mindate = scope.restrictions.mindate
+				maxdate = scope.restrictions.maxdate
+				(mindate? and currentDate < mindate) or (maxdate? and currentDate > maxdate)
+			isVisibleMonthButton: (minOrMax) ->
+				date = scope.restrictions[minOrMax]
+				date? and @_month <= date.getMonth() and @_year <= date.getFullYear()
 			class: (d) ->
 				# coffeelint: disable=max_line_length
 				if scope.date? and new Date(@_year, @_month, d).getTime() is new Date(scope.date.getTime()).setHours(0,0,0,0) then "selected"
@@ -74,8 +84,20 @@ angular.module('mdDateTime', [])
 			select: (d) -> scope.date.setFullYear @_year, @_month, d
 			monthChange: ->
 				if not @_year? or isNaN @_year then @_year = new Date().getFullYear()
+				mindate = scope.restrictions.mindate
+				maxdate = scope.restrictions.maxdate
+				if mindate? and mindate.getFullYear() is @_year and mindate.getMonth() >= @_month
+					@_month = Math.max mindate.getMonth(), @_month
+				if maxdate? and maxdate.getFullYear() is @_year and maxdate.getMonth() <= @_month
+					@_month = Math.min maxdate.getMonth(), @_month
 				scope.date.setFullYear @_year, @_month
 				if scope.date.getMonth() isnt @_month then scope.date.setDate 0
+				if mindate? and scope.date < mindate
+					scope.date.setDate mindate.getTime()
+					scope.calendar.select mindate.getDate()
+				if maxdate? and scope.date > maxdate
+					scope.date.setDate maxdate.getTime()
+					scope.calendar.select maxdate.getDate()
 			_incMonth: (months) ->
 				@_month += months
 				while @_month < 0 or @_month > 11
@@ -112,6 +134,13 @@ angular.module('mdDateTime', [])
 					else if val is 12 then val = 0
 					else if not scope.clock.isAM() then val += 12
 				if val isnt scope.date.getHours() then scope.date.setHours val
+		scope.$watch 'calendar._year', (val) ->
+			mindate = scope.restrictions.mindate
+			maxdate = scope.restrictions.maxdate
+			i = if mindate? and mindate.getFullYear() is scope.calendar._year then mindate.getMonth() else 0
+			len = if maxdate? and maxdate.getFullYear() is scope.calendar._year then maxdate.getMonth() else 11
+			scope.calendar._months = scope.calendar._allMonths.slice i, len+1
+
 		scope.setNow = -> scope.setDate()
 		scope._mode = 'date'
 		scope.modeClass = ->
