@@ -49,7 +49,6 @@ angular.module('mdDateTime', [])
 			scope.clock._minutes = scope.date.getMinutes()
 			scope.clock._hours = if scope._hours24 then scope.date.getHours() else scope.date.getHours() % 12
 			if not scope._hours24 and scope.clock._hours is 0 then scope.clock._hours = 12
-		scope.weekdays = _weekdays
 		scope.display =
 			fullTitle: -> _dateFilter scope.date, 'EEEE d MMMM yyyy, h:mm a'
 			title: ->
