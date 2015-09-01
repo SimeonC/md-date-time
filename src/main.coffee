@@ -25,8 +25,7 @@ angular.module('mdDateTime', [])
 			if val
 				scope._weekdays = val
 			else
-				scope._weekdays = 'SMTWTFS'
-			scope._weekdays = scope._weekdays.substring(0, 7).split('')
+				scope._weekdays = ['S','M','T','W','T','F','S']
 		ngModel.$render = -> scope.setDate ngModel.$modelValue
 
 		saveFn = $parse attrs.onSave

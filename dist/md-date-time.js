@@ -50,11 +50,10 @@
         });
         attrs.$observe('weekdays', function(val) {
           if (val) {
-            scope._weekdays = val;
+            return scope._weekdays = val;
           } else {
-            scope._weekdays = 'SMTWTFS';
+            return scope._weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
           }
-          return scope._weekdays = scope._weekdays.substring(0, 7).split('');
         });
         ngModel.$render = function() {
           return scope.setDate(ngModel.$modelValue);
