@@ -5,7 +5,7 @@ angular.module('mdDateTime', [])
 	replace: true
 	scope:
 		_modelValue: '=ngModel'
-		_weekdays: ['S','M','T','W','T','F','S']
+		_weekdays: '=ngWeekdays'
 	require: 'ngModel'
 	templateUrl: 'md-date-time.tpl.html'
 	link: (scope, element, attrs, ngModel) ->
@@ -23,7 +23,10 @@ angular.module('mdDateTime', [])
 			if val? and angular.isDate val then scope.restrictions.maxdate = val
 		attrs.$observe 'weekdays', (val) ->
 			if val
-				scope._weekdays = val.substring(0, 7).split('')
+				scope._weekdays = val
+			else
+				scope._weekdays = 'SMTWTFS'
+			scope._weekdays = scope._weekdays.substring(0, 7).split('')
 		ngModel.$render = -> scope.setDate ngModel.$modelValue
 
 		saveFn = $parse attrs.onSave

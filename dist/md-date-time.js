@@ -14,7 +14,7 @@
       replace: true,
       scope: {
         _modelValue: '=ngModel',
-        _weekdays: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+        _weekdays: '=ngWeekdays'
       },
       require: 'ngModel',
       templateUrl: 'md-date-time.tpl.html',
@@ -50,8 +50,11 @@
         });
         attrs.$observe('weekdays', function(val) {
           if (val) {
-            return scope._weekdays = val.substring(0, 7).split('');
+            scope._weekdays = val;
+          } else {
+            scope._weekdays = 'SMTWTFS';
           }
+          return scope._weekdays = scope._weekdays.substring(0, 7).split('');
         });
         ngModel.$render = function() {
           return scope.setDate(ngModel.$modelValue);
