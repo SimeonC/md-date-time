@@ -23,7 +23,7 @@ angular.module('mdDateTime', [])
 			if val? and angular.isDate val then scope.restrictions.maxdate = val
 		attrs.$observe 'weekdays', (val) ->
 			if val
-				val scope._weekdays = val.substring(0, 7).split('')
+				scope._weekdays = val.substring(0, 7).split('')
 		ngModel.$render = -> scope.setDate ngModel.$modelValue
 
 		saveFn = $parse attrs.onSave
