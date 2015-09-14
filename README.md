@@ -1,4 +1,4 @@
-scDateTime (formerly mdDateTmie)
+scDateTime (formerly mdDateTime)
 ===========
 
 
