@@ -1,7 +1,7 @@
-mdDateTime
+mdDateTime (Depreciated)
 ===========
 
-[![Build Status](https://travis-ci.org/simeonc/md-date-time.png?branch=master)](https://travis-ci.org/simeonc/md-date-time) [![Coverage Status](https://coveralls.io/repos/simeonc/md-date-time/badge.png)](https://coveralls.io/r/simeonc/md-date-time)
+# All future work is being done in [scDateTime](http://simeonc.github.io/sc-date-time)
 
 
 ## Requirements
