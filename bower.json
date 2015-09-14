@@ -19,7 +19,8 @@
     "package.json"
   ],
   "dependencies": {
-    "angular": "^1.2.x"
+    "angular": "^1.2.x",
+    "font-awesome": "^4.2.0"
   },
   "license": "MIT",
   "homepage": "http://simeonc.github.io/md-date-time"

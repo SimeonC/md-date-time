@@ -7,6 +7,7 @@ mdDateTime
 ## Requirements
 
 1. `AngularJS` ≥ `1.2.x`
+2. `FontAwesome` ≥ `4.2.x`
 
 ### Optional Recommended requirements
 
