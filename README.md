@@ -1,7 +1,5 @@
-mdDateTime
+scDateTime (formerly mdDateTmie)
 ===========
-
-[![Build Status](https://travis-ci.org/simeonc/md-date-time.png?branch=master)](https://travis-ci.org/simeonc/md-date-time) [![Coverage Status](https://coveralls.io/repos/simeonc/md-date-time/badge.png)](https://coveralls.io/r/simeonc/md-date-time)
 
 
 ## Requirements
@@ -12,45 +10,31 @@ mdDateTime
 ### Optional Recommended requirements
 
 1. [Angular-Material](https://github.com/angular/material)
-
-### For non-Material projects.
-
-If you are not using angular-material you need to shim the `md-button` directive as follows (Example for bootstrap, for non bootstrap remove the btn and btn-link classes and you will probably have to alter the styling)
-
-```js
-.directive('mdButton', [function(){
-	return {
-		replace: true,
-		restricte: 'E',
-		transclude: true,
-		template: '<button class="btn btn-link md-button" ng-transclude></button>'
-	};
-}]);
-```
+2. [Bootstrap](http://getbootstrap.com) (Note with bootstrap <= v3 a default font-size of 16px is recommended as all sizes are set via rem)
 
 ### Where to get it
 
 **Via Bower:**
 
-Run `bower install md-date-time` from the command line.
+Run `bower install sc-date-time` from the command line.
 Include script tags similar to the following:
 ```html
-<link rel='stylesheet' href='/bower_components/md-date-time/dist/md-date-time.css'>
-<script src='/bower_components/md-date-time/dist/md-date-time.js'></script>
+<link rel='stylesheet' href='/bower_components/sc-date-time/dist/sc-date-time.css'>
+<script src='/bower_components/sc-date-time/dist/sc-date-time.js'></script>
 ```
 
 **Via Github**
 
-Download the code from [https://github.com/simeonc/md-date-time/releases/latest](https://github.com/simeonc/md-date-time/releases/latest), unzip the files then add script tags similar to the following:
+Download the code from [https://github.com/simeonc/sc-date-time/releases/latest](https://github.com/simeonc/sc-date-time/releases/latest), unzip the files then add script tags similar to the following:
 ```html
-<link rel='stylesheet' href='/path/to/unzipped/files/md-date-time/dist/md-date-time.css'>
-<script src='/path/to/unzipped/files/md-date-time/dist/md-date-time.js'></script>
+<link rel='stylesheet' href='/path/to/unzipped/files/sc-date-time/dist/sc-date-time.css'>
+<script src='/path/to/unzipped/files/sc-date-time/dist/sc-date-time.js'></script>
 ```
 
 ### Usage
 
-1. Include `md-date-time.js` and `md-date-time.css`, if not using angular-material see the **For non-Material projects** for the mdButton shim.
-2. Add a dependency to `mdDateTime` in your app module, for example: ```angular.module('myModule', ['mdDateTime'])```.
+1. Include `sc-date-time.js` and `sc-date-time.css`.
+2. Add a dependency to `scDateTime` in your app module, for example: ```angular.module('myModule', ['scDateTime'])```.
 3. Some implementation settings are required to get this useful, but for basic inline use:
 ```html
 <time-date-picker ng-model="dateValue"></time-date-picker>
@@ -139,4 +123,4 @@ This project is licensed under the [MIT license](http://opensource.org/licenses/
 
 Special thanks to all the contributions thus far! 
 
-For a full list see: https://github.com/simeonc/md-date-time/graphs/contributors
+For a full list see: https://github.com/simeonc/sc-date-time/graphs/contributors

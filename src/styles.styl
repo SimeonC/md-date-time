@@ -1,20 +1,20 @@
 /* Start Variable Declaration */
 
-title-background = rgb(0, 121, 107)
-title-colour = rgb(225, 225, 225)
-content-background = rgb(0, 150, 136)
-content-main-colour = rgb(225, 225, 225)
-content-secondary-colour = rgba(255, 255, 255, 0.5)
-background-colour = rgb(255, 255, 255)
-text-colour = rgb(32, 32, 32)
-unselectable-text-colour = rgb(115, 115, 115)
-today-text-colour = rgb(0, 150, 136)
-selected-text-colour = background-colour
-selected-background-colour = rgb(0, 150, 136)
-hover-text-colour = darken(selected-text-colour, 10%)
-hover-background-colour = lighten(selected-background-colour, 10%)
-button-text-colour = rgb(0, 150, 136)
-clock-background-colour = rgb(236, 239, 241)
+$title-background ?= rgb(0, 121, 107)
+$title-colour ?= rgb(225, 225, 225)
+$content-background ?= rgb(0, 150, 136)
+$content-main-colour ?= rgb(225, 225, 225)
+$content-secondary-colour ?= rgba(255, 255, 255, 0.5)
+$background-colour ?= rgb(255, 255, 255)
+$text-colour ?= rgb(32, 32, 32)
+$unselectable-text-colour ?= rgb(115, 115, 115)
+$today-text-colour ?= rgb(0, 150, 136)
+$selected-text-colour ?= $background-colour
+$selected-background-colour ?= rgb(0, 150, 136)
+$hover-text-colour ?= darken($selected-text-colour, 10%)
+$hover-background-colour ?= lighten($selected-background-colour, 10%)
+$button-text-colour ?= rgb(0, 150, 136)
+$clock-background-colour ?= rgb(236, 239, 241)
 
 clearfix()
 	&:after, &:before
@@ -40,12 +40,38 @@ clock-radius = 75
 	width: 46.1rem
 	font-size: 1.2rem
 
-	.md-button
-		padding: 6px
-		margin: 0
-		min-width: initial
-		line-height: inherit
-		font-size: inherit
+	&[theme=bootstrap]
+		.btn
+			outline: 0
+			line-height: 2.4rem
+			text-transform: uppercase
+			padding-top: 0
+			padding-bottom: 0
+			font-weight: inherit
+			font-size: inherit
+		& > .control > .slider > .date-control > .days > .day-cell
+			&.today
+				position: relative
+				&::after
+					content: " "
+					position: absolute
+					bottom: 3px
+					right: 3px
+					width: 0
+					height: 0
+					border-style: solid
+					border-width: 0 0 0.6rem 0.6rem
+					border-color: transparent transparent currentColor transparent
+
+	&[theme=material], &:not([theme])
+		.md-button
+			padding: 6px
+			margin: 0
+			min-width: initial
+			line-height: inherit
+			font-size: inherit
+		& > .control > .slider > .date-control .day-cell
+			border-radius: 3rem
 	& > .display
 		position: relative
 		width: 47%
@@ -53,8 +79,8 @@ clock-radius = 75
 		cursor: pointer
 		transition: color 0.6s ease-in-out
 		& > .title
-			background-color: title-background
-			color: title-colour
+			background-color: $title-background
+			color: $title-colour
 			line-height: 2.5rem
 		& > .content
 			position: absolute
@@ -64,8 +90,8 @@ clock-radius = 75
 			top: 2.4rem
 			padding: 2.3rem 0
 			font-size: 1.5rem
-			background-color: content-background
-			color: content-main-colour
+			background-color: $content-background
+			color: $content-main-colour
 			& > .super-title
 				text-transform: uppercase
 			& > .main-title
@@ -76,15 +102,15 @@ clock-radius = 75
 					font-size: 1.1rem
 					margin-left: 0.3rem
 			& > .sub-title
-				color: content-secondary-colour
+				color: $content-secondary-colour
 	& > .control
 		width: 53%
 		overflow-x: hidden
 		position: relative
 		& > .full-title
 			display: none
-			background-color: title-background
-			color: title-colour
+			background-color: $title-background
+			color: $title-colour
 			line-height: 2.4rem
 		& > .slider
 			position: absolute !important
@@ -128,37 +154,38 @@ clock-radius = 75
 						border: none
 						width: 4.3rem
 				& > .headers
-					margin-top: -0.7rem
 					font-weight: 500
 					font-size: 1rem
 					padding-left: 1.5rem
-					color: unselectable-text-colour
+					color: $unselectable-text-colour
 					text-align: left
 					& > .day-cell
 						text-align: center
 						cursor: default
 						box-sizing: border-box
+						padding-bottom: 0
+						height: 2rem
 				& .day-cell
 					float: left
-					width: 2.7rem
-					height: 2.7rem
-					padding: 0.7rem 6px 6px 6px
+					width: 2.5rem
+					height: 2.5rem
+					margin: 0.1rem
+					padding: 0rem 6px
 					cursor: pointer
-					border-radius: 3.0rem
 				& > .days
 					font-size: 1rem
 					padding-left: 1.5rem
 					width: (2.7 * 7.7) rem
 					& .day-cell
-						color: text-colour
+						color: $text-colour
 						&.today
-							color: today-text-colour
+							color: $today-text-colour
 						&.selected
-							color: selected-text-colour
-							background-color: selected-background-colour
+							color: $selected-text-colour
+							background-color: $selected-background-colour
 						&:hover, &:active
-							color: hover-text-colour
-							background-color: hover-background-colour
+							color: $hover-text-colour
+							background-color: $hover-background-colour
 						&:disabled
 							color: #aaa
 							background-color: none;
@@ -171,7 +198,7 @@ clock-radius = 75
 					position: absolute
 					left: 0
 					right: 0
-					& > button.md-button
+					& > .hours, & > .minutes
 						font-size: 3.0rem
 						line-height: 1rem
 						width: 8.4rem
@@ -243,7 +270,7 @@ clock-radius = 75
 		padding: 0.7rem
 		text-align: right
 	& button, & .button
-		color: button-text-colour
+		color: $button-text-colour
 	&.full-mode
 		& > .display
 			display: none
@@ -260,10 +287,10 @@ clock-radius = 75
 				& > .switch-control
 					display: none
 		& > .buttons
-			background-color: selected-background-colour
+			background-color: $selected-background-colour
 			& > button
 				/* Invert colours for bottom bar */
-				color: selected-text-colour !important
+				color: $selected-text-colour !important
 
 vertical-orient()
 	width: 23.1rem
