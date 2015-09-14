@@ -58,8 +58,9 @@ Download the code from [https://github.com/simeonc/md-date-time/releases/latest]
 
 ### Options
 
-* **on-cancel:** Function passed in is called if the cancel button is pressed. `on-cancel="cancelFn()"`
-* **on-save:** Function passed in is called when the date is saved via the OK button, date value is available as $value. `on-save="saveFn($value)"`
+* **autosave** If this attribute is present the cancel and save buttons are removed and their respective events do not fire. The model is updated as the picker changes.
+* **on-cancel** Function passed in is called if the cancel button is pressed. `on-cancel="cancelFn()"`
+* **on-save** Function passed in is called when the date is saved via the OK button, date value is available as $value. `on-save="saveFn($value)"`
 * **default-mode** A string of value 'date'/'time', which side of the slider that should be shown initially, overridden by display-mode
 * **default-date** A date-time string that the selects the date should the model be null. Defaults to today (new Date()).
 * **display-mode** Options are "full"; display time and date selectors and no display, "time"; show only the time input, "date"; show only the date input

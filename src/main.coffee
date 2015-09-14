@@ -20,7 +20,6 @@ angular.module('mdDateTime', [])
 	restrict: 'AE'
 	replace: true
 	scope:
-		_modelValue: '=ngModel'
 		_weekdays: '=?tdWeekdays'
 	require: 'ngModel'
 	templateUrl: 'md-date-time.tpl.html'
@@ -51,16 +50,21 @@ angular.module('mdDateTime', [])
 
 		ngModel.$render = -> scope.setDate ngModel.$modelValue or scope._defaultDate
 
-		saveFn = $parse attrs.onSave
-		cancelFn = $parse attrs.onCancel
+		scope.autosave = false
+		if attrs['autosave']?
+			console.log 'detected autosave'
+			scope.$watch 'date', ngModel.$setViewValue
+			scope.autosave = true
+		else
+			saveFn = $parse attrs.onSave
+			cancelFn = $parse attrs.onCancel
 
-		scope.save = ->
-			scope._modelValue = scope.date
-			ngModel.$setDirty()
-			saveFn scope.$parent, $value: scope.date
-		scope.cancel = ->
-			cancelFn scope.$parent, {}
-			ngModel.$render()
+			scope.save = ->
+				ngModel.$setViewValue new Date scope.date
+				saveFn scope.$parent, $value: new Date scope.date
+			scope.cancel = ->
+				cancelFn scope.$parent, {}
+				ngModel.$render()
 	controller: ['$scope', 'scDateTimeI18n', (scope, scDateTimeI18n) ->
 		scope.translations = scDateTimeI18n
 		scope.restrictions =

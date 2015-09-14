@@ -45,5 +45,5 @@
 					md-button(ng-click="clock.setAM()" aria-label="{{:: translations.switchAmPm}}") {{date | date:'a'}}
 	.buttons
 		md-button(ng-click="setNow()" aria-label="{{:: translations.now}}") {{:: translations.now}}
-		md-button(ng-click="cancel()" aria-label="{{:: translations.cancel}}") {{:: translations.cancel}}
-		md-button(ng-click="save()" aria-label="{{:: translations.save}}") {{:: translations.save}}
+		md-button(ng-click="cancel()" ng-if="!autosave" aria-label="{{:: translations.cancel}}") {{:: translations.cancel}}
+		md-button(ng-click="save()" ng-if="!autosave" aria-label="{{:: translations.save}}") {{:: translations.save}}
