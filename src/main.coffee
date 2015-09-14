@@ -1,5 +1,13 @@
 angular.module('scDateTime', [])
-.value('scDateTimeI18n',
+.value('scDateTimeConfig',
+	defaultTheme: 'material'
+	autosave: false
+	defaultMode: 'date'
+	defaultDate: undefined # should be date object!!
+	displayMode: undefined
+	defaultOrientation: false
+	displayTwentyfour: false
+).value('scDateTimeI18n',
 	previousMonth: "Previous Month"
 	nextMonth: "Next Month"
 	incrementHours: "Increment Hours"
@@ -14,45 +22,46 @@ angular.module('scDateTime', [])
 	switchTo: 'Switch to'
 	clock: 'Clock'
 	calendar: 'Calendar'
-).directive 'timeDatePicker', ['$filter', '$sce', '$rootScope', '$parse', 'scDateTimeI18n',
-($filter, $sce, $rootScope, $parse, scDateTimeI18n) ->
+).directive 'timeDatePicker', ['$filter', '$sce', '$rootScope', '$parse', 'scDateTimeI18n', 'scDateTimeConfig',
+($filter, $sce, $rootScope, $parse, scDateTimeI18n, scDateTimeConfig) ->
 	_dateFilter = $filter 'date'
 	restrict: 'AE'
 	replace: true
 	scope:
 		_weekdays: '=?tdWeekdays'
 	require: 'ngModel'
-	templateUrl: 'scDateTime-material.tpl'
+	templateUrl: (tElement, tAttrs) -> 'scDateTime-' + (tAttrs.theme ? scDateTimeConfig.defaultTheme) + '.tpl'
 	link: (scope, element, attrs, ngModel) ->
 		attrs.$observe 'defaultMode', (val) ->
-			if val isnt 'time' and val isnt 'date' then val = 'date'
+			if val isnt 'time' and val isnt 'date' then val = scDateTimeConfig.defaultMode
 			scope._mode = val
 		attrs.$observe 'defaultDate', (val) ->
 			scope._defaultDate = if val? and Date.parse val then Date.parse val
-			else undefined
+			else scDateTimeConfig.defaultDate
 		attrs.$observe 'displayMode', (val) ->
-			if val isnt 'full' and val isnt 'time' and val isnt 'date' then val = undefined
+			if val isnt 'full' and val isnt 'time' and val isnt 'date' then val = scDateTimeConfig.displayMode
 			scope._displayMode = val
-		attrs.$observe 'orientation', (val) -> scope._verticalMode = val is 'true'
-		attrs.$observe 'displayTwentyfour', (val) -> scope._hours24 = val? and val
+		attrs.$observe 'orientation', (val) ->
+			scope._verticalMode = if val? then val is 'true' else scDateTimeConfig.defaultOrientation
+		attrs.$observe 'displayTwentyfour', (val) ->
+			scope._hours24 = if val? then val else scDateTimeConfig.displayTwentyfour
 		attrs.$observe 'mindate', (val) ->
 			if val? and Date.parse val
-							scope.restrictions.mindate = new Date val
-							scope.restrictions.mindate.setHours 0, 0, 0, 0
+				scope.restrictions.mindate = new Date val
+				scope.restrictions.mindate.setHours 0, 0, 0, 0
 		attrs.$observe 'maxdate', (val) ->
 			if val? and Date.parse val
-							scope.restrictions.maxdate = new Date val
-							scope.restrictions.maxdate.setHours 23, 59, 59, 999
+				scope.restrictions.maxdate = new Date val
+				scope.restrictions.maxdate.setHours 23, 59, 59, 999
 		scope._weekdays = scope._weekdays or scDateTimeI18n.weekdays
 		scope.$watch '_weekdays', (value) ->
 			if not value? or not angular.isArray value
-							scope._weekdays = scDateTimeI18n.weekdays
+				scope._weekdays = scDateTimeI18n.weekdays
 
 		ngModel.$render = -> scope.setDate ngModel.$modelValue or scope._defaultDate
 
 		scope.autosave = false
-		if attrs['autosave']?
-			console.log 'detected autosave'
+		if attrs['autosave']? or scDateTimeConfig.autosave
 			scope.$watch 'date', ngModel.$setViewValue
 			scope.autosave = true
 		else
@@ -66,6 +75,7 @@ angular.module('scDateTime', [])
 				cancelFn scope.$parent, {}
 				ngModel.$render()
 	controller: ['$scope', 'scDateTimeI18n', (scope, scDateTimeI18n) ->
+		scope._defaultDate = scDateTimeConfig.defaultDate
 		scope.translations = scDateTimeI18n
 		scope.restrictions =
 			mindate: undefined
@@ -180,10 +190,13 @@ angular.module('scDateTime', [])
 			scope.calendar._months = scope.calendar._allMonths.slice i, len + 1
 
 		scope.setNow = -> scope.setDate()
-		scope._mode = 'date'
+		scope._mode = scDateTimeConfig.defaultMode
+		scope._displayMode = scDateTimeConfig.displayMode
+		scope._verticalMode = scDateTimeConfig.defaultOrientation
+		scope._hours24 = scDateTimeConfig.displayTwentyfour
 		scope.modeClass = ->
 			if scope._displayMode? then scope._mode = scope._displayMode
-			"#{if scope._verticalMode? and scope._verticalMode then 'vertical ' else ''}#{
+			"#{if scope._verticalMode then 'vertical ' else ''}#{
 			if scope._displayMode is 'full' then 'full-mode'
 			else if scope._displayMode is 'time' then 'time-only'
 			else if scope._displayMode is 'date' then 'date-only'

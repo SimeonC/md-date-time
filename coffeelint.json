@@ -10,7 +10,7 @@
         }
     },
     "indentation": {
-        "value": 4,
+        "value": 1,
         "level": "error"
     },
     "max_line_length": {

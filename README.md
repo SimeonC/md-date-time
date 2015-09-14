@@ -58,14 +58,15 @@ Download the code from [https://github.com/simeonc/md-date-time/releases/latest]
 
 ### Options
 
-* **autosave** If this attribute is present the cancel and save buttons are removed and their respective events do not fire. The model is updated as the picker changes.
+* **theme** String representing one of the supported themes, default value is set via the `scDateTimeConfig.defaultTheme` property.
+* **autosave** If this attribute is present the cancel and save buttons are removed and their respective events do not fire. The model is updated as the picker changes. Default value is set via the `scDateTimeConfig.autosave` property.
 * **on-cancel** Function passed in is called if the cancel button is pressed. `on-cancel="cancelFn()"`
 * **on-save** Function passed in is called when the date is saved via the OK button, date value is available as $value. `on-save="saveFn($value)"`
-* **default-mode** A string of value 'date'/'time', which side of the slider that should be shown initially, overridden by display-mode
-* **default-date** A date-time string that the selects the date should the model be null. Defaults to today (new Date()).
-* **display-mode** Options are "full"; display time and date selectors and no display, "time"; show only the time input, "date"; show only the date input
-* **orientation** If this string value is 'true' then the picker will be in vertical mode. Otherwise it will change to vertical mode if the screen width is less than 51rem as that is the size of the editor
-* **display-twentyfour** If this value is truthy then display 24 hours in time, else use 12 hour time.
+* **default-mode** A string of value 'date'/'time', which side of the slider that should be shown initially, overridden by display-mode. Default value is set via the `scDateTimeConfig.defaultMode` property.
+* **default-date** A date-time string that the selects the date should the model be null. Defaults to today (new Date()). Default can be overridden globally via `scDateTimeConfig.defaultDate` property.
+* **display-mode** Options are "full"; display time and date selectors and no display, "time"; show only the time input, "date"; show only the date input. Default value is set via the `scDateTimeConfig.displayMode` property.
+* **orientation** If this string value is 'true' then the picker will be in vertical mode. Otherwise it will change to vertical mode if the screen width is less than 51rem as that is the size of the editor. Default value is set via the `scDateTimeConfig.defaultOrientation` property.
+* **display-twentyfour** If this value is truthy then display 24 hours in time, else use 12 hour time. Default value is set via the `scDateTimeConfig.displayTwentyfour` property.
 * **mindate** A date string that represents the minimum selectable date/time
 * **maxdate** A date string that represents the maximum selectable date/time
 * **weekdays** Optionally bind an array of strings, this defaults to the englist S, M, T, W etc. Intended for full multilanguage support on directive level.
@@ -93,6 +94,21 @@ angular.module('testMod', ['scDateTime']).value('scDateTimeI18n', {
 });
 ```
 
+#### scDateTimeConfig
+
+Default values for globally configurable options as follows:
+
+```javascript
+.value('scDateTimeConfig', {
+	defaultTheme: 'material',
+	autosave: false,
+	defaultMode: 'date',
+	defaultDate: undefined, //should be date object!!
+	displayMode: undefined,
+	defaultOrientation: false,
+	displayTwentyfour: false
+})
+```
 
 ### Issues?
 
