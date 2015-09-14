@@ -2,7 +2,7 @@
 	@license md-date-time
 	@author SimeonC
 	@license 2015 MIT
-	@version 0.0.15
+	@version 0.1.0
 	
 	See README.md for requirements and use.
 */angular.module('mdDateTime', []).directive('timeDatePicker', [

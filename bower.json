@@ -1,6 +1,6 @@
 {
   "name": "md-date-time",
-  "version": "0.0.15",
+  "version": "0.1.0",
   "main": [
     "./dist/md-date-time.js",
     "./dist/md-date-time.css"

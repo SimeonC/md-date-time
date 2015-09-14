@@ -1,3 +1,11 @@
+## 0.1.0 (2015-09-14)
+
+
+#### Bug Fixes
+
+* **md-button:** change style of md-button to fix #16 ([36e75521](git://github.com/simeonc/md-date-time.git/commit/36e755217893e6a830a2324caf17b069d7b63b30), closes [#16](git://github.com/simeonc/md-date-time.git/issues/16))
+
+
 ### 0.0.14 (2015-03-23)
 
 
