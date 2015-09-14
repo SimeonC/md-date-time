@@ -12,6 +12,9 @@ angular.module('mdDateTime', [])
 		attrs.$observe 'defaultMode', (val) ->
 			if val isnt 'time' and val isnt 'date' then val = 'date'
 			scope._mode = val
+		attrs.$observe 'defaultDate', (val) ->
+			scope._defaultDate = if val? and Date.parse val then Date.parse val
+			else undefined
 		attrs.$observe 'displayMode', (val) ->
 			if val isnt 'full' and val isnt 'time' and val isnt 'date' then val = undefined
 			scope._displayMode = val
@@ -30,7 +33,7 @@ angular.module('mdDateTime', [])
 			if not value? or not angular.isArray value
 							scope._weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
 
-		ngModel.$render = -> scope.setDate ngModel.$modelValue
+		ngModel.$render = -> scope.setDate ngModel.$modelValue or scope._defaultDate
 
 		saveFn = $parse attrs.onSave
 		cancelFn = $parse attrs.onCancel

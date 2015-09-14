@@ -26,6 +26,9 @@
           }
           return scope._mode = val;
         });
+        attrs.$observe('defaultDate', function(val) {
+          return scope._defaultDate = (val != null) && Date.parse(val) ? Date.parse(val) : void 0;
+        });
         attrs.$observe('displayMode', function(val) {
           if (val !== 'full' && val !== 'time' && val !== 'date') {
             val = void 0;
@@ -57,7 +60,7 @@
           }
         });
         ngModel.$render = function() {
-          return scope.setDate(ngModel.$modelValue);
+          return scope.setDate(ngModel.$modelValue || scope._defaultDate);
         };
         saveFn = $parse(attrs.onSave);
         cancelFn = $parse(attrs.onCancel);
