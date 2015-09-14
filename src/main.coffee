@@ -1,5 +1,21 @@
 angular.module('mdDateTime', [])
-.directive 'timeDatePicker', ['$filter', '$sce', '$rootScope', '$parse', ($filter, $sce, $rootScope, $parse) ->
+.value('scDateTimeI18n',
+	previousMonth: "Previous Month"
+	nextMonth: "Next Month"
+	incrementHours: "Increment Hours"
+	decrementHours: "Decrement Hours"
+	incrementMinutes: "Increment Minutes"
+	decrementMinutes: "Decrement Minutes"
+	switchAmPm: "Switch AM/PM"
+	now: "Now"
+	cancel: "Cancel"
+	save: "Save"
+	weekdays: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+	switchTo: 'Switch to'
+	clock: 'Clock'
+	calendar: 'Calendar'
+).directive 'timeDatePicker', ['$filter', '$sce', '$rootScope', '$parse', 'scDateTimeI18n',
+($filter, $sce, $rootScope, $parse, scDateTimeI18n) ->
 	_dateFilter = $filter 'date'
 	restrict: 'AE'
 	replace: true
@@ -28,10 +44,10 @@ angular.module('mdDateTime', [])
 			if val? and Date.parse val
 							scope.restrictions.maxdate = new Date val
 							scope.restrictions.maxdate.setHours 23, 59, 59, 999
-		scope._weekdays = scope._weekdays or ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+		scope._weekdays = scope._weekdays or scDateTimeI18n.weekdays
 		scope.$watch '_weekdays', (value) ->
 			if not value? or not angular.isArray value
-							scope._weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+							scope._weekdays = scDateTimeI18n.weekdays
 
 		ngModel.$render = -> scope.setDate ngModel.$modelValue or scope._defaultDate
 
@@ -45,7 +61,8 @@ angular.module('mdDateTime', [])
 		scope.cancel = ->
 			cancelFn scope.$parent, {}
 			ngModel.$render()
-	controller: ['$scope', (scope) ->
+	controller: ['$scope', 'scDateTimeI18n', (scope, scDateTimeI18n) ->
+		scope.translations = scDateTimeI18n
 		scope.restrictions =
 			mindate: undefined
 			maxdate: undefined
@@ -169,5 +186,6 @@ angular.module('mdDateTime', [])
 			else if scope._mode is 'date' then 'date-mode'
 			else 'time-mode'}"
 		scope.modeSwitch = -> scope._mode = scope._displayMode ? if scope._mode is 'date' then 'time' else 'date'
-		scope.modeSwitchText = -> if scope._mode is 'date' then 'Clock' else 'Calendar'
+		scope.modeSwitchText = -> scDateTimeI18n.switchTo + ' ' +
+			if scope._mode is 'date' then scDateTimeI18n.clock else scDateTimeI18n.calendar
 	]]

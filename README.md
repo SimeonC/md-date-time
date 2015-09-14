@@ -67,7 +67,31 @@ Download the code from [https://github.com/simeonc/md-date-time/releases/latest]
 * **display-twentyfour** If this value is truthy then display 24 hours in time, else use 12 hour time.
 * **mindate** A date string that represents the minimum selectable date/time
 * **maxdate** A date string that represents the maximum selectable date/time
-* **weekdays** Optionally bind an array of strings, this defaults to the englist S, M, T, W etc. Intended for full multilanguage support.
+* **weekdays** Optionally bind an array of strings, this defaults to the englist S, M, T, W etc. Intended for full multilanguage support on directive level.
+
+#### scDateTimeI18n
+
+Currently there is a value defined on the module which has all of the aria-label and text values for the entire picker. This can be overwritten for full multilanguage support as follows (all defaults shown):
+
+```javascript
+angular.module('testMod', ['scDateTime']).value('scDateTimeI18n', {
+	previousMonth: "Previous Month",
+	nextMonth: "Next Month",
+	incrementHours: "Increment Hours",
+	decrementHours: "Decrement Hours",
+	incrementMinutes: "Increment Minutes",
+	decrementMinutes: "Decrement Minutes",
+	switchAmPm: "Switch AM/PM",
+	now: "Now",
+	cancel: "Cancel",
+	save: "Save",
+	weekdays: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+	switchTo: 'Switch to',
+	clock: 'Clock',
+	calendar: 'Calendar'
+});
+```
+
 
 ### Issues?
 
