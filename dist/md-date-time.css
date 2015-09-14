@@ -17,6 +17,13 @@
   width: 46.1rem;
   font-size: 1.2rem;
 }
+.time-date .md-button {
+  padding: 6px;
+  margin: 0;
+  min-width: initial;
+  line-height: inherit;
+  font-size: inherit;
+}
 .time-date > .display {
   position: relative;
   width: 47%;
@@ -139,6 +146,7 @@
 .time-date > .control > .slider > .date-control > .headers > .day-cell {
   text-align: center;
   cursor: default;
+  box-sizing: border-box;
 }
 .time-date > .control > .slider > .date-control .day-cell {
   float: left;

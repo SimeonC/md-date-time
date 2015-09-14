@@ -1,20 +1,20 @@
 /* Start Variable Declaration */
 
 title-background = rgb(0, 121, 107)
-title-colour = rgb(225,225,225)
+title-colour = rgb(225, 225, 225)
 content-background = rgb(0, 150, 136)
-content-main-colour = rgb(225,225,225)
+content-main-colour = rgb(225, 225, 225)
 content-secondary-colour = rgba(255, 255, 255, 0.5)
 background-colour = rgb(255, 255, 255)
-text-colour = rgb(32,32,32)
-unselectable-text-colour = rgb(115,115,115)
+text-colour = rgb(32, 32, 32)
+unselectable-text-colour = rgb(115, 115, 115)
 today-text-colour = rgb(0, 150, 136)
 selected-text-colour = background-colour
 selected-background-colour = rgb(0, 150, 136)
 hover-text-colour = darken(selected-text-colour, 10%)
 hover-background-colour = lighten(selected-background-colour, 10%)
 button-text-colour = rgb(0, 150, 136)
-clock-background-colour = rgb(236,239,241)
+clock-background-colour = rgb(236, 239, 241)
 
 clearfix()
 	&:after, &:before
@@ -39,6 +39,13 @@ clock-radius = 75
 	border: none
 	width: 46.1rem
 	font-size: 1.2rem
+
+	.md-button
+		padding: 6px
+		margin: 0
+		min-width: initial
+		line-height: inherit
+		font-size: inherit
 	& > .display
 		position: relative
 		width: 47%
@@ -130,6 +137,7 @@ clock-radius = 75
 					& > .day-cell
 						text-align: center
 						cursor: default
+						box-sizing: border-box
 				& .day-cell
 					float: left
 					width: 2.7rem
@@ -140,7 +148,7 @@ clock-radius = 75
 				& > .days
 					font-size: 1rem
 					padding-left: 1.5rem
-					width: (2.7 * 7.7)rem
+					width: (2.7 * 7.7) rem
 					& .day-cell
 						color: text-colour
 						&.today
@@ -270,9 +278,9 @@ vertical-orient()
 			height: 15.5rem
 	& > .control
 		width: 100%
-	&.time-mode	> .display > .content
+	&.time-mode > .display > .content
 		padding-top: 4.6rem
-	&.time-only	> .display > .content
+	&.time-only > .display > .content
 		top: 0px
 		padding-top: 0.8rem
 		height: 10rem

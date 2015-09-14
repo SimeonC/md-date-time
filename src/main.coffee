@@ -25,10 +25,10 @@ angular.module('mdDateTime', [])
 			if val? and Date.parse val
 							scope.restrictions.maxdate = new Date val
 							scope.restrictions.maxdate.setHours 23, 59, 59, 999
-		scope._weekdays = scope._weekdays or ['S','M','T','W','T','F','S']
+		scope._weekdays = scope._weekdays or ['S', 'M', 'T', 'W', 'T', 'F', 'S']
 		scope.$watch '_weekdays', (value) ->
 			if not value? or not angular.isArray value
-							scope._weekdays = ['S','M','T','W','T','F','S']
+							scope._weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
 
 		ngModel.$render = -> scope.setDate ngModel.$modelValue
 
@@ -88,12 +88,13 @@ angular.module('mdDateTime', [])
 			class: (d) ->
 				classString = ''
 				# coffeelint: disable=max_line_length
-				if scope.date? and new Date(@_year, @_month, d).getTime() is new Date(scope.date.getTime()).setHours(0,0,0,0)
-				  classString += "selected"
-				if new Date(@_year, @_month, d).getTime() is new Date().setHours(0,0,0,0)
-				  classString += " today"
+				if scope.date? and new Date(@_year, @_month, d).getTime() is new Date(scope.date.getTime()).setHours(0,
+					0, 0, 0)
+					classString += "selected"
+				if new Date(@_year, @_month, d).getTime() is new Date().setHours(0, 0, 0, 0)
+					classString += " today"
 				classString
-				# coffeelint: enable=max_line_length
+# coffeelint: enable=max_line_length
 			select: (d) -> scope.date.setFullYear @_year, @_month, d
 			monthChange: ->
 				if not @_year? or isNaN @_year then @_year = new Date().getFullYear()
@@ -132,7 +133,7 @@ angular.module('mdDateTime', [])
 			_incMinutes: (inc) ->
 				@_minutes = Math.max 0, Math.min 59, @_minutes + inc
 				if isNaN @_minutes then @_minutes = 0
-			setAM: (b=not @isAM()) ->
+			setAM: (b = not @isAM()) ->
 				if b and not @isAM()
 					scope.date.setHours(scope.date.getHours() - 12)
 				else if not b and @isAM()
@@ -152,7 +153,7 @@ angular.module('mdDateTime', [])
 			maxdate = scope.restrictions.maxdate
 			i = if mindate? and mindate.getFullYear() is scope.calendar._year then mindate.getMonth() else 0
 			len = if maxdate? and maxdate.getFullYear() is scope.calendar._year then maxdate.getMonth() else 11
-			scope.calendar._months = scope.calendar._allMonths.slice i, len+1
+			scope.calendar._months = scope.calendar._allMonths.slice i, len + 1
 
 		scope.setNow = -> scope.setDate()
 		scope._mode = 'date'
@@ -166,4 +167,4 @@ angular.module('mdDateTime', [])
 			else 'time-mode'}"
 		scope.modeSwitch = -> scope._mode = scope._displayMode ? if scope._mode is 'date' then 'time' else 'date'
 		scope.modeSwitchText = -> if scope._mode is 'date' then 'Clock' else 'Calendar'
-]]
+	]]
