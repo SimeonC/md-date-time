@@ -1,4 +1,4 @@
-angular.module('mdDateTime', [])
+angular.module('scDateTime', [])
 .value('scDateTimeI18n',
 	previousMonth: "Previous Month"
 	nextMonth: "Next Month"
@@ -22,7 +22,7 @@ angular.module('mdDateTime', [])
 	scope:
 		_weekdays: '=?tdWeekdays'
 	require: 'ngModel'
-	templateUrl: 'md-date-time.tpl.html'
+	templateUrl: 'scDateTime-material.tpl'
 	link: (scope, element, attrs, ngModel) ->
 		attrs.$observe 'defaultMode', (val) ->
 			if val isnt 'time' and val isnt 'date' then val = 'date'

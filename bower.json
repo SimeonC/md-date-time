@@ -1,11 +1,11 @@
 {
-  "name": "md-date-time",
+  "name": "sc-date-time",
   "version": "0.1.0",
   "main": [
-    "./dist/md-date-time.js",
-    "./dist/md-date-time.css"
+    "./dist/sc-date-time.js",
+    "./dist/sc-date-time.css"
   ],
-  "description": "An implementation of the Material Design Date-Time picker",
+  "description": "An implementation of the Material Design Date-Time picker for Angular-Material and bootstrap",
   "keywords": [
     "angular"
   ],
@@ -23,5 +23,5 @@
     "font-awesome": "^4.2.0"
   },
   "license": "MIT",
-  "homepage": "http://simeonc.github.io/md-date-time"
+  "homepage": "http://simeonc.github.io/sc-date-time"
 }

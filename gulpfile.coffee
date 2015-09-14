@@ -25,14 +25,14 @@ htmlmin = require 'gulp-htmlmin'
 
 gulp.task 'clean:dist', (cb) -> del ['dist/*'], cb
 gulp.task 'compile:jade', ['clean:dist'], ->
-	gulp.src ['./src/template.jade']
+	gulp.src ['./src/*.jade']
 		.pipe jade()
-		.pipe rename 'md-date-time.tpl.temp'
-		.pipe gulp.dest 'dist'
-		.pipe rename 'md-date-time.tpl.html'
+		.pipe rename
+			prefix: 'scDateTime-'
+			extname: '.tpl'
 		.pipe htmlmin collapseWhitespace: true
-		.pipe ngtemplate module: 'mdDateTime'
-		.pipe rename 'md-date-time.tpl.js.temp'
+		.pipe ngtemplate module: 'scDateTime'
+		.pipe rename extname: '.tpl.temp' # for temp file cleanup
 		.pipe gulp.dest 'dist'
 gulp.task 'compile:coffee', ['compile:jade'], ->
 	gulp.src ['./src/main.coffee']
@@ -41,15 +41,15 @@ gulp.task 'compile:coffee', ['compile:jade'], ->
 		.pipe coffeelint.reporter()
 		.pipe coffeelint.reporter 'fail'
 		.pipe coffee bare: true
-		.pipe rename 'md-date-time.js'
+		.pipe rename 'sc-date-time.js'
 		.pipe gulp.dest 'dist'
 gulp.task 'compile:javascript', ['compile:coffee'], ->
 	pkg = JSON.parse fs.readFileSync './package.json', 'utf8'
-	gulp.src ['./dist/md-date-time.js','./dist/md-date-time.tpl.js.temp']
-		.pipe order ['dist/md-date-time.js','dist/md-date-time.tpl.js.temp']
-		.pipe concat 'md-date-time.js'
+	gulp.src ['./dist/sc-date-time.js','./dist/*.tpl.temp']
+		.pipe order ['dist/sc-date-time.js','dist/*.tpl.temp']
+		.pipe concat 'sc-date-time.js'
 		.pipe concat.header """/*
-			@license md-date-time
+			@license sc-date-time
 			@author SimeonC
 			@license 2015 MIT
 			@version #{pkg.version}
@@ -66,7 +66,7 @@ gulp.task 'compile:stylus', ['clean:dist'], ->
 		.pipe autoprefixer()
 		.pipe concat()
 		.pipe concat.header """/*
-			@license md-date-time
+			@license sc-date-time
 			@author SimeonC
 			@license 2015 MIT
 			@version #{pkg.version}
@@ -74,7 +74,7 @@ gulp.task 'compile:stylus', ['clean:dist'], ->
 			See README.md for requirements and use.
 		*/
 		"""
-		.pipe rename 'md-date-time.css'
+		.pipe rename 'sc-date-time.css'
 		.pipe gulp.dest 'dist'
 
 gulp.task 'compile:main', ['compile:javascript','compile:stylus']
