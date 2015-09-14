@@ -5,6 +5,7 @@ angular.module('mdDateTime', [])
 	replace: true
 	scope:
 		_modelValue: '=ngModel'
+		_weekdays: '=?tdWeekdays'
 	require: 'ngModel'
 	templateUrl: 'md-date-time.tpl.html'
 	link: (scope, element, attrs, ngModel) ->
@@ -24,6 +25,11 @@ angular.module('mdDateTime', [])
 			if val? and Date.parse val
 							scope.restrictions.maxdate = new Date val
 							scope.restrictions.maxdate.setHours 23, 59, 59, 999
+		scope._weekdays = scope._weekdays or ['S','M','T','W','T','F','S']
+		scope.$watch '_weekdays', (value) ->
+			if not value? or not angular.isArray value
+							scope._weekdays = ['S','M','T','W','T','F','S']
+
 		ngModel.$render = -> scope.setDate ngModel.$modelValue
 
 		saveFn = $parse attrs.onSave

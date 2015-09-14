@@ -65,7 +65,7 @@ Download the code from [https://github.com/simeonc/md-date-time/releases/latest]
 * **display-twentyfour** If this value is truthy then display 24 hours in time, else use 12 hour time.
 * **mindate** A date string that represents the minimum selectable date/time
 * **maxdate** A date string that represents the maximum selectable date/time
-
+* **weekdays** Optionally bind an array of strings, this defaults to the englist S, M, T, W etc. Intended for full multilanguage support.
 
 ### Issues?
 

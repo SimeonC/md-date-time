@@ -2,16 +2,13 @@
 	@license md-date-time
 	@author SimeonC
 	@license 2015 MIT
-	@version 0.0.14
+	@version 0.0.15
 	
 	See README.md for requirements and use.
 *//* Start Variable Declaration */
 /* End Variable Declaration */
 /* Start Main Styling */
 .visuallyhidden {
-  visibility: hidden;
-}
-.hide {
   visibility: hidden;
 }
 .time-date {
@@ -25,7 +22,8 @@
   width: 47%;
   height: 100%;
   cursor: pointer;
-  transition: color 0.6s ease-in-out;
+  -webkit-transition: color 0.6s ease-in-out;
+          transition: color 0.6s ease-in-out;
 }
 .time-date > .display > .title {
   background-color: #00796b;
@@ -72,7 +70,8 @@
 .time-date > .control > .slider {
   position: absolute !important;
   width: 200%;
-  transition: left 0.6s ease-in-out;
+  -webkit-transition: left 0.6s ease-in-out;
+          transition: left 0.6s ease-in-out;
 }
 .time-date > .control > .slider > .date-control,
 .time-date > .control > .slider > .time-control,
@@ -313,7 +312,8 @@
 .time-date.vertical > .display {
   width: 100%;
   height: auto;
-  transition: color 0.6s ease-in-out, height 0.6s ease-in-out;
+  -webkit-transition: color 0.6s ease-in-out, height 0.6s ease-in-out;
+          transition: color 0.6s ease-in-out, height 0.6s ease-in-out;
 }
 .time-date.vertical > .display > .content {
   position: relative;
@@ -360,7 +360,8 @@
   .time-date > .display {
     width: 100%;
     height: auto;
-    transition: color 0.6s ease-in-out, height 0.6s ease-in-out;
+    -webkit-transition: color 0.6s ease-in-out, height 0.6s ease-in-out;
+            transition: color 0.6s ease-in-out, height 0.6s ease-in-out;
   }
   .time-date > .display > .content {
     position: relative;
