@@ -14,7 +14,7 @@
 						i.fa.fa-caret-left
 					span.month-part {{date | date:'MMMM'}}
 						select(ng-model="calendar._month" ng-change="calendar.monthChange()" ng-options="calendar._allMonths.indexOf(month) as month for month in calendar._months")
-					input.year-part(ng-model="calendar._year" ng-change="calendar.monthChange()" type="number" min="{{restrictions.mindate ? restrictions.mindate.getFullYear() : 0}}" max="{{restrcitions.maxdate ? restrictions.maxdate.getFullYear() : NaN}}")
+					input.year-part(ng-model="calendar._year" type="number" min="{{restrictions.mindate ? restrictions.mindate.getFullYear() : 0}}" max="{{restrcitions.maxdate ? restrictions.maxdate.getFullYear() : NaN}}")
 					md-button(ng-click="calendar._incMonth(1)" aria-label="{{:: translations.nextMonth}}" style="float: right;" ng-class="{'visuallyhidden': calendar.isVisibleMonthButton('maxdate')}")
 						i.fa.fa-caret-right
 				.headers

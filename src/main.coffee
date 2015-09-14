@@ -183,11 +183,13 @@ angular.module('scDateTime', [])
 					else if not scope.clock.isAM() then val += 12
 				if val isnt scope.date.getHours() then scope.date.setHours val
 		scope.$watch 'calendar._year', (val) ->
+			if not val? or val is '' then return
 			mindate = scope.restrictions.mindate
 			maxdate = scope.restrictions.maxdate
 			i = if mindate? and mindate.getFullYear() is scope.calendar._year then mindate.getMonth() else 0
 			len = if maxdate? and maxdate.getFullYear() is scope.calendar._year then maxdate.getMonth() else 11
 			scope.calendar._months = scope.calendar._allMonths.slice i, len + 1
+			scope.calendar.monthChange()
 
 		scope.setNow = -> scope.setDate()
 		scope._mode = scDateTimeConfig.defaultMode
